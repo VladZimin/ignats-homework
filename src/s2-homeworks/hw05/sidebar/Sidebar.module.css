@@ -40,17 +40,23 @@
 }
 
 .nav a:hover {
+    color: #0059B2;
+    text-decoration: underline;
 }
 
 .nav a.active {
+    color: #58ACFF;
 }
 
 .close {
     position: absolute;
-    right: 0;
+    top: 10px;
+    right: 10px;
     background: none;
     border: none;
+    cursor: pointer;
 }
 
-.close img {
+.close img:hover {
+    background-color: #ef724c;
 }
