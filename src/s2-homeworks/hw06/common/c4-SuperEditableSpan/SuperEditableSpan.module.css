@@ -1,11 +1,18 @@
-.spanBlock {
+.spanBlock, .input {
+    margin-bottom: 10px;
 }
 
 .span {
+    position: relative;
+    bottom: 2px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #0080FF;
 }
 
-.input {
-}
 
 .pen {
+    display: inline;
+    margin-right: 5px;
 }
