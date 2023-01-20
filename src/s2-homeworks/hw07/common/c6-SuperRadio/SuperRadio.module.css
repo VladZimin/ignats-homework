@@ -1,15 +1,22 @@
 .radio {
-}
-
-.radio::before {
-}
-
-
-.radio:checked::before {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    accent-color: black;
+    cursor: pointer;
 }
 
 .label {
+    display: flex;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .options {
+    display: flex;
+    flex-direction: column;
+    margin-left: 70px;
 }
