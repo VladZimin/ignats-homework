@@ -7,8 +7,9 @@
     display: flex;
     padding: 10px 20px;
     justify-content: space-between;
-    box-shadow: 0 5px 10px #969696;
+    box-shadow: 3px 2px 4px #969696;
 }
 
 .header h1 {
+    color: black;
 }
