@@ -1,8 +1,9 @@
-.container {
-}
-
 .wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
 .number {
+    margin: 0 15px;
 }
