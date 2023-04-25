@@ -23,10 +23,6 @@ function HW11() {
         } else setValue1(value)
     }
 
-    useEffect(() => {
-        if (value1 > value2) setValue1(value2)
-    }, [value1, value2])
-
     return (
         <div id={'hw11'}>
             <div className={s2.hwTitle}>Homework #11</div>
