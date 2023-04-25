@@ -5,5 +5,8 @@
 }
 
 .number {
+    text-align: center;
+    min-width: 30px;
     margin: 0 15px;
+
 }

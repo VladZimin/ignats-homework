@@ -23,6 +23,10 @@ function HW11() {
         } else setValue1(value)
     }
 
+    useEffect(() => {
+        if (value1 > value2) setValue1(value2)
+    }, [value1, value2])
+
     return (
         <div id={'hw11'}>
             <div className={s2.hwTitle}>Homework #11</div>
@@ -35,6 +39,7 @@ function HW11() {
                             id={'hw11-single-slider'}
                             value={value1}
                             onChange={change}
+                            valueLabelDisplay={'auto'}
                             // сделать так чтоб value1 изменялось // пишет студент
 
                         />
@@ -46,6 +51,7 @@ function HW11() {
                             getAriaLabel={() => 'Temperature range'}
                             value={[value1, value2]}
                             onChange={change}
+                            valueLabelDisplay={'auto'}
                             disableSwap
                             // сделать так чтоб value1/2 изменялось // пишет студент
 
