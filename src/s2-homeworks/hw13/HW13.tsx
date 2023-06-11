@@ -19,6 +19,27 @@ const HW13 = () => {
     const [text, setText] = useState('')
     const [info, setInfo] = useState('')
     const [image, setImage] = useState('')
+    const [isFetching, setIsFetching] = useState(false)
+
+    const setStateFromResponse = (res: any) => {
+        const currentCode = res.status === 200 ? 'Код 200!'
+            : res.code === 'ERR_NETWORK' ? 'Error!'
+                : `Ошибка ${res.response.status}!`
+        const currentImage = res.status === 200 ? success200
+            : res.code === 'ERR_NETWORK' ? errorUnknown
+                : res.response.status === 400 ? error400
+                    : error500
+        const currentText = res.status === 200 ? res.data.errorText
+            : res.code === 'ERR_NETWORK' ? res.message
+                : res.response.data.errorText
+        const currentInfo = res.status === 200 ? res.data.info
+            : res.code === 'ERR_NETWORK' ? res.message
+                : res.response.data.info
+        setCode(currentCode)
+        setImage(currentImage)
+        setText(currentText)
+        setInfo(currentInfo)
+    }
 
     const send = (x?: boolean | null) => () => {
         const url =
@@ -30,30 +51,17 @@ const HW13 = () => {
         setImage('')
         setText('')
         setInfo('...loading')
-
+        setIsFetching(true)
         axios
             .post(url, {success: x})
             .then((res) => {
-                setCode('Код 200!')
-                setImage(success200)
-                setText('...всё ок) код 200 - обычно означает что скорее всего всё ок)')
-                setInfo('')
+                setStateFromResponse(res)
             })
-            .catch((e) => {
-                if (e.code === 'ERR_BAD_RESPONSE') {
-                    setCode('Ошибка 500!')
-                    setImage(error500)
-                    setText('имитация ошибки на сервере ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)')
-                } else if (e.code === 'ERR_BAD_REQUEST') {
-                    setCode('Ошибка 400!')
-                    setImage(error400)
-                    setText('Ты не отправил success в body вообще! ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!')
-                } else {
-                    setCode('Error!')
-                    setImage(errorUnknown)
-                    setText('Network Error AxiosError')
-                }
-                setInfo('')
+            .catch((err) => {
+                setStateFromResponse(err)
+            })
+            .finally(() => {
+                setIsFetching(false)
             })
     }
 
@@ -67,7 +75,7 @@ const HW13 = () => {
                         id={'hw13-send-true'}
                         onClick={send(true)}
                         xType={'secondary'}
-                        disabled={!!info}
+                        disabled={isFetching}
                     >
                         Send true
                     </SuperButton>
@@ -75,7 +83,7 @@ const HW13 = () => {
                         id={'hw13-send-false'}
                         onClick={send(false)}
                         xType={'secondary'}
-                        disabled={!!info}
+                        disabled={isFetching}
                     >
                         Send false
                     </SuperButton>
@@ -83,7 +91,7 @@ const HW13 = () => {
                         id={'hw13-send-undefined'}
                         onClick={send(undefined)}
                         xType={'secondary'}
-                        disabled={!!info}
+                        disabled={isFetching}
                     >
                         Send undefined
                     </SuperButton>
@@ -91,7 +99,7 @@ const HW13 = () => {
                         id={'hw13-send-null'}
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
-                        disabled={!!info}
+                        disabled={isFetching}
                     >
                         Send null
                     </SuperButton>
