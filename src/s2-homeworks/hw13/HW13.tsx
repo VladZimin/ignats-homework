@@ -33,8 +33,9 @@ const HW13 = () => {
             : res.code === 'ERR_NETWORK' ? res.message
                 : res.response.data.errorText
         const currentInfo = res.status === 200 ? res.data.info
-            : res.code === 'ERR_NETWORK' ? res.message
+            : res.code === 'ERR_NETWORK' ? res.name
                 : res.response.data.info
+
         setCode(currentCode)
         setImage(currentImage)
         setText(currentText)
@@ -58,6 +59,7 @@ const HW13 = () => {
                 setStateFromResponse(res)
             })
             .catch((err) => {
+                console.log(err)
                 setStateFromResponse(err)
             })
             .finally(() => {
